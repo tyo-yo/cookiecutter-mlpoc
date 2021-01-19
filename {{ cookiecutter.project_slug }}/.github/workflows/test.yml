@@ -19,7 +19,9 @@ jobs:
         uses: whoan/docker-build-with-cache-action@v5
         with:
           username: tyo-yo
+{% raw %}
           password: "${{ secrets.GITHUB_TOKEN }}"
+{% endraw %}
           image_name: {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
           push_git_tag: true
           registry: docker.pkg.github.com
