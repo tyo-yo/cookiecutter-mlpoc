@@ -1,0 +1,9 @@
+{
+  "full_name": "Tomoaki Nakamura",
+  "email": "nakamura213tomoaki@gmail.com",
+  "github_username": "tyo-yo",
+  "project_name": "Your Project Name",
+  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+  "project_short_description": "Some description.",
+  "version": "0.1.0"
+}
