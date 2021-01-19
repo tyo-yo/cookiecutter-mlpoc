@@ -1,6 +1,6 @@
 FROM python:3.7.6-slim AS builder
 
-ENV WORKDIR /app/
+ENV WORKDIR /{{ cookiecutter.project_slug }}/
 
 WORKDIR ${WORKDIR}
 
