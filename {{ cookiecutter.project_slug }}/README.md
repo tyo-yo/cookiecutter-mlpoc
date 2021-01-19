@@ -9,8 +9,9 @@
 git clone https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}.git
 cd {{ cookiecutter.project_slug }}
 
-
-docker run {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }}
+docker run --rm -it -v $PWD:/{{ cookiecutter.project_slug }} --env-file .env --gpus all {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }} bash
+docker run --rm -it -v $PWD:/{{ cookiecutter.project_slug }} -p 11111:11111 --env-file .env --gpus all {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }} streamlit run --server.port 11111 app.py
+docker run --rm -it -v $PWD:/{{ cookiecutter.project_slug }} -p 11111:11111 --env-file .env --gpus all {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }} jupyter lab --port=11111 --ip=0.0.0.0 --no-browser --allow-root
 ```
 
 
@@ -18,10 +19,8 @@ docker run {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/{{
 1. Setup your developemntal environment
   * Using Docker (Recommended):
 ```
-docker pull {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }}
-
 # If you update python dependencies, you should re-build docker image
-# docker build . -t  {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }}
+docker build . -t  {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }}
 ```
   * Using poetry:
     * First, you should install dependencies other than python dependencies like MeCab
