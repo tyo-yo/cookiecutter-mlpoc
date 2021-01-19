@@ -1,4 +1,4 @@
-FROM python:3.7.6-slim AS builder
+FROM python:3.6-slim AS builder
 
 ENV WORKDIR /{{ cookiecutter.project_slug }}/
 

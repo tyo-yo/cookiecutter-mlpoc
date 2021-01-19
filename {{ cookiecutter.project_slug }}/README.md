@@ -49,3 +49,4 @@ poetry install
      * [Typer](https://typer.tiangolo.com) would supports building CLI
    * You should write test to make sure there are no bugs: ``tests/``
 
+http://colab.research.google.com/github/tyo-yo/cookiecutter-mlpoc/blob/main/notebooks/demo-colab-streamlit.ipynb
