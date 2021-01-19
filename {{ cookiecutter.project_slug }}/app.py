@@ -24,4 +24,3 @@ page = PAGES[selection]
 # apps以下の変更が逐次反映されるようにreloadする
 importlib.reload(page)
 page.app()
-
