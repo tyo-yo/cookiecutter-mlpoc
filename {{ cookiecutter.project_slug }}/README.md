@@ -1,26 +1,27 @@
 # {{ cookiecutter.project_name}}
+![Tests](https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/workflows/Tests/badge.svg)  [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
+
 {{ cookiecutter.project_short_description }}
 
-
-## Quick Start
-1. Install the latest Cookiecutter if you haven't installed it yet (this requires Cookiecutter 1.4.0 or higher):
-
+## Usage
 ```shell
-pip install -U cookiecutter
+git clone https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}.git
+cd {{ cookiecutter.project_slug }}
+
+
+docker run {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }}
 ```
 
-2. Generate a Python package project:
 
-```shell
-cookiecutter https://github.com/tyo-yo/cookiecutter-mlpoc
-```
-
-3. Create a repo and put it there
-
-4. Setup your developemntal environment
+## Quick Start (for owner)
+1. Setup your developemntal environment
   * Using Docker (Recommended):
 ```
-docker build . -t {{ cookiecutter.project_slug }}
+docker pull {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }}
+
+# If you update python dependencies, you should re-build docker image
+# docker build . -t  {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }}
 ```
   * Using poetry:
     * First, you should install dependencies other than python dependencies like MeCab
