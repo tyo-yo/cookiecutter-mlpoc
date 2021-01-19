@@ -37,8 +37,9 @@ docker build . -t {{ cookiecutter.project_slug }}
 ```
 poetry install
 ```
+5. Create your own .env file and put your secret information like API key
 
-5. Get your code on!
+6. Get your code on!
    * Your main component like model should be under ``project_slug/``
    * Visualization like data analysis can be made by jupyter notebook: ``notebooks/``
    * Dataset should be on cloud like AWS S3 or Google Storage for reproducibility
