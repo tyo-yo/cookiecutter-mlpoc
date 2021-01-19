@@ -28,16 +28,16 @@ jobs:
           dockerfile: Dockerfile
 
       - name: Pytest
-        run: docker run --rm -v $PWD:/app {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }} pytest
+        run: docker run --rm -v $PWD:/app {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }} pytest
 
       - name: Flake8 code style test
         if: always()
-        run: docker run --rm -v $PWD:/app {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }} flake8 --show-source
+        run: docker run --rm -v $PWD:/app {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }} flake8 --show-source
 
       - name: Black code style test
         if: always()
-        run: docker run --rm -v $PWD:/app {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }} black --check {{ cookiecutter.project_slug }} tests
+        run: docker run --rm -v $PWD:/app {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }} black --check {{ cookiecutter.project_slug }} tests
 
       - name: Isort imports order test
         if: always()
-        run: docker run --rm -v $PWD:/app {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }} isort -c {{ cookiecutter.project_slug }}/**.py tests/**.py
+        run: docker run --rm -v $PWD:/app {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }} isort -c {{ cookiecutter.project_slug }}/**.py tests/**.py
