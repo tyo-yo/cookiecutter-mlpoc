@@ -22,7 +22,7 @@ jobs:
 {% raw %}
           password: "${{ secrets.GITHUB_TOKEN }}"
 {% endraw %}
-          image_name: {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
+          image_name: {{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/{{ cookiecutter.project_slug }}
           push_git_tag: true
           registry: docker.pkg.github.com
           dockerfile: Dockerfile
