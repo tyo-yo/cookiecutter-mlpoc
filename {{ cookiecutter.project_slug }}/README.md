@@ -9,7 +9,7 @@
 ### 🤣  Interactive Demo launcher powered by Google Colab
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](http://colab.research.google.com/github/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/blob/master/notebooks/demo-colab-streamlit.ipynb)
 
-### 📙 Google Colab Demo
+### 📙  Google Colab Demo
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](http://colab.research.google.com/github/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/blob/master/notebooks/demo-colab.ipynb)
 
 
@@ -50,5 +50,8 @@ poetry install
    * Some command-line utility like profile your code should be under ``scripts/``
      * [Typer](https://typer.tiangolo.com) would supports building CLI
    * You should write test to make sure there are no bugs: ``tests/``
+   * You should install python dependencies via ``poetry``, not ``pip``
+     * It may help you to define your production environment Google Colab (Python 3.6.9)
+     * If you do so, you should install dependencies which is not necessary for demo via ``poetry add --dev``
 
 
