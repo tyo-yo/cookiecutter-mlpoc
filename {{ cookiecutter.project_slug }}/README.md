@@ -4,6 +4,15 @@
 
 {{ cookiecutter.project_short_description }}
 
+## Online Demo
+
+### 🤣  Interactive Demo launcher powered by Google Colab
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](http://colab.research.google.com/github/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/blob/master/notebooks/demo-colab-streamlit.ipynb)
+
+### 📙 Google Colab Demo
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](http://colab.research.google.com/github/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/blob/master/notebooks/demo-colab.ipynb)
+
+
 ## Usage
 ```shell
 git clone https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}.git
@@ -42,4 +51,4 @@ poetry install
      * [Typer](https://typer.tiangolo.com) would supports building CLI
    * You should write test to make sure there are no bugs: ``tests/``
 
-http://colab.research.google.com/github/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/blob/main/notebooks/demo-colab-streamlit.ipynb
+
