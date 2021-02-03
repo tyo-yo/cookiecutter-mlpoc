@@ -51,7 +51,7 @@ poetry install
      * [Typer](https://typer.tiangolo.com) would supports building CLI
    * You should write test to make sure there are no bugs: ``tests/``
    * You should install python dependencies via ``poetry``, not ``pip``
-     * It may help you to define your production environment Google Colab (Python 3.6.9)
+     * It may help you to define your production environment Google Colab (Python 3.6.9 with GPU or TPU)
      * If you do so, you should install dependencies which is not necessary for demo via ``poetry add --dev``
 
 

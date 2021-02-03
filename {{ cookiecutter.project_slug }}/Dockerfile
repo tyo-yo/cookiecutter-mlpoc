@@ -4,7 +4,7 @@ ENV WORKDIR /{{ cookiecutter.project_slug }}/
 
 WORKDIR ${WORKDIR}
 
-RUN apt-get update && apt-get install -y build-essential
+RUN apt-get update && apt-get install -y build-essential git
 
 # Install MeCab
 # RUN apt-get update && apt-get install -y mecab libmecab-dev
