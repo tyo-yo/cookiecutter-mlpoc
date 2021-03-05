@@ -1,0 +1,11 @@
+FROM gcr.io/tpu-pytorch/xla:r1.7
+
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+
+RUN pip install \
+    transformers \
+    datasets \
+    sentencepiece \
+    comet_ml \
+    typer
