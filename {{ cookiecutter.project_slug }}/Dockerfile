@@ -1,47 +1,40 @@
-FROM python:3.7-slim AS builder
+FROM nvidia/cuda:10.2-devel-ubuntu18.04
 
-ENV WORKDIR /{{ cookiecutter.project_slug }}/
+ENV DEBIAN_FRONTEND=noninteractive
+WORKDIR /tmp/
 
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    git \
+    wget \
+    curl \
+    libbz2-dev libdb-dev \
+    libreadline-dev libffi-dev libgdbm-dev liblzma-dev \
+    libncursesw5-dev libsqlite3-dev libssl-dev \
+    zlib1g-dev uuid-dev tk-dev
+# MeCab
+# mecab \
+# libmecab-dev
+
+# Install Python
+RUN wget https://www.python.org/ftp/python/3.7.10/Python-3.7.10.tgz && \
+    tar xvf Python-3.7.10.tgz
+
+WORKDIR /tmp/Python-3.7.10
+RUN ./configure && \
+    make && \
+    make install
+
+WORKDIR /usr/local/bin
+RUN ln -s python3.7 python
+
+ENV WORKDIR /poc_qa/
 WORKDIR ${WORKDIR}
 
-RUN apt-get update && apt-get install -y build-essential git
-
-# Install MeCab
-# RUN apt-get update && apt-get install -y mecab libmecab-dev
-
-# cuda install start
-# https://gitlab.com/nvidia/container-images/cuda/blob/master/dist/11.0/ubuntu20.04-x86_64/base/Dockerfile
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    gnupg2 curl ca-certificates && \
-    curl -fsSL https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub | apt-key add - && \
-    echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda.list && \
-    apt-get purge --autoremove -y curl \
-    && rm -rf /var/lib/apt/lists/*
-
-# For libraries in the cuda-compat-* package: https://docs.nvidia.com/cuda/eula/index.html#attachment-a
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    cuda-cudart-11-0=11.0.194-1 \
-    cuda-compat-11-0 \
-    && ln -s cuda-11.0 /usr/local/cuda && \
-    rm -rf /var/lib/apt/lists/*
-
-# Required for nvidia-docker v1
-RUN echo "/usr/local/nvidia/lib" >> /etc/ld.so.conf.d/nvidia.conf && \
-    echo "/usr/local/nvidia/lib64" >> /etc/ld.so.conf.d/nvidia.conf
-
-ENV PATH /usr/local/nvidia/bin:/usr/local/cuda/bin:${PATH}
-ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
-
-# nvidia-container-runtime
-ENV NVIDIA_VISIBLE_DEVICES all
-ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
-ENV NVIDIA_REQUIRE_CUDA "cuda>=11.0 brand=tesla,driver>=418,driver<419 brand=tesla,driver>=440,driver<441"
-
-# cuda install end
-
 # Python の依存ライブラリ管理ツールpoetryをインストール
-RUN pip install poetry && \
-    poetry config virtualenvs.create false
+RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -
+ENV PATH $PATH:/root/.poetry/bin
+RUN poetry config virtualenvs.create false
 COPY poetry.lock pyproject.toml ${WORKDIR}
 
 # FROM builder as development
@@ -50,4 +43,15 @@ RUN poetry install --no-root
 # 明示的に--no-rootをつけているが、rootパッケージ以下をCOPYしてないからこのオプションをつけていなくても結果は同じになる
 # pros: rootパッケージ内のコードを書き換えてもbuildし直さなくて良い
 # cons: カレントディレクトリが異なる時 import root_package できない（sys.path）
+
+# jupyter上でhboxを表示するため
+# https://stackoverflow.com/questions/57343134/jupyter-notebooks-not-displaying-progress-bars
+# https://qiita.com/seibe/items/36cef7df85fe2cefa3ea
+# RUN apt-get update & apt-get install -y nodejs npm ;\
+#     npm install n -g ;\
+#     n stable ;\
+#     apt-get purge -y nodejs npm ;\
+#     jupyter nbextension enable --py widgetsnbextension ;\
+#     jupyter labextension install @jupyter-widgets/jupyterlab-manager
+
 
